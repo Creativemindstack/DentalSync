@@ -247,7 +247,7 @@ function renderPatientMessages() {
           <div class="notif-icon teal">${icon}</div>
           <div style="flex:1;">
             <p class="notif-text"><strong>${root.subject}</strong></p>
-            <p class="notif-time">${root.patientName}${thread.unread ? ' · Unread' : ''}</p>
+            <p class="notif-time">${root.patientName}${root.clinicName ? ' · ' + root.clinicName : ''}${thread.unread ? ' · Unread' : ''}</p>
           </div>
         </div>
         <button type="button" class="btn btn-outline btn-sm remove-thread-btn" data-thread-id="${thread.threadId}">Remove</button>
