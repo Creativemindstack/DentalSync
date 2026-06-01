@@ -99,7 +99,7 @@ function showNotificationDrawer(htmlContent) {
       btn.addEventListener('click', (e) => {
         // if it's an anchor, prevent default navigation
         if (e.target.closest('a') || btn.tagName.toLowerCase() === 'a') e.preventDefault();
-        const href = btn.getAttribute('href') || (btn.closest && btn.closest('a') && btn.closest('a').getAttribute('href')) || 'notifications.html';
+        const href = btn.getAttribute('href') || (btn.closest && btn.closest('a') && btn.closest('a').getAttribute('href')) || 'messages.html';
         fetch(href).then(res => {
           if (!res.ok) throw new Error('network');
           return res.text();

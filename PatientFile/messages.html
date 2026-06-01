@@ -40,10 +40,6 @@
         <span class="icon">💬</span> Messages
         <span class="badge">2</span>
       </a>
-      <a href="notifications.html" class="menu-item">
-        <span class="icon">🔔</span> Notifications
-        <span class="badge">3</span>
-      </a>
       <a href="settings.html" class="menu-item">
         <span class="icon">⚙️</span> Settings
       </a>
@@ -93,6 +89,23 @@
             </div>
             <button type="submit" class="btn btn-primary btn-sm">Send Message</button>
           </form>
+        </div>
+
+        <div class="card" style="padding:20px;margin-bottom:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+            <h2 style="font-size:1rem;margin:0;">Conversations</h2>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn btn-ghost btn-sm" id="markAllRead" type="button">Mark all as read</button>
+              <button class="btn btn-outline btn-sm" id="clearAllMessages" type="button">Clear all</button>
+            </div>
+          </div>
+          <p id="messageThreadsEmpty" class="hidden" style="color:var(--text-muted);font-size:0.9rem;">No messages yet. Messages from your clinic and appointment updates will appear here.</p>
+          <div id="messageThreadsList"></div>
+        </div>
+
+        <div class="card" style="padding:20px;">
+          <h2 style="font-size:1rem;margin-bottom:14px;">Visit Records</h2>
+          <div id="syncNotificationsList"></div>
         </div>
 
       </div><!-- /page-body -->
