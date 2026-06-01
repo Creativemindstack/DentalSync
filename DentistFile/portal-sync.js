@@ -79,7 +79,8 @@ function renderPortalUI() {
 function renderDashboardStats() {
   const bookings = getPortalBookings();
   const today = DentalSync.getTodayISO();
-  const todayBookings = bookings.filter(a => DentalSync.normalizeDateKey(a.date) === today);
+  const todayScheduleAppointments = DentalSync.getClinicScheduleAppointments(today);
+  const todayBookings = todayScheduleAppointments.slice();
   const pending = bookings.filter(a => {
     const s = a.status || 'pending';
     return s === 'pending' || s === 'in_progress';
@@ -89,7 +90,7 @@ function renderDashboardStats() {
 
   const statValues = document.querySelectorAll('.stats-grid .stat-value');
   if (statValues[0]) statValues[0].textContent = String(todayBookings.length);
-  if (statValues[1]) statValues[1].textContent = String(patients || bookings.length);
+  if (statValues[1]) statValues[1].textContent = String(patients || todayBookings.length);
   if (statValues[3]) statValues[3].textContent = String(unread);
 
   const statNotes = document.querySelectorAll('.stats-grid .stat-note');
@@ -97,12 +98,17 @@ function renderDashboardStats() {
 
   const subtitle = document.querySelector('.hero-card .subtitle');
   if (subtitle) {
-    const next = pending[0] || todayBookings[0];
+    const next = todayBookings[0] || pending[0];
     if (next) {
       subtitle.innerHTML = `Today’s schedule: <strong>${todayBookings.length} patient visit${todayBookings.length === 1 ? '' : 's'}</strong> · Next: <strong>${DentalSync.extractStartTime(next.time)} with ${next.patientName}</strong>`;
     } else {
       subtitle.innerHTML = `Today’s schedule: <strong>${todayBookings.length} patient visit${todayBookings.length === 1 ? '' : 's'}</strong> · No pending online bookings`;
     }
+  }
+
+  const scheduleQuickCard = document.querySelector('.quick-actions a[href="appointments.html"]');
+  if (scheduleQuickCard) {
+    scheduleQuickCard.innerHTML = `<div class="card-icon">📅</div>Today’s Schedule (${todayBookings.length})`;
   }
 
   const upcomingCard = document.querySelector('.dashboard-bottom .card');
